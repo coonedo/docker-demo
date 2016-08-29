@@ -237,7 +237,7 @@ Additional Notes
 
 
 
-	Dockerfile
+	- Dockerfile
 
 	FROM node:0.12
 	WORKDIR /app
@@ -280,5 +280,283 @@ Additional Notes
 
 
 
+
+
+
+
+
+
+
+
+
+	SHOW DOCKER CONTAINER or IMAGE DETAILS
+
+Inspect Docker Image
+
+vagrant@docker:~$ sudo docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED
+VIRTUAL SIZE
+<none>              <none>              17653fe98f52        4 days ago
+646.5 MB
+vagrant@docker:~$ sudo docker inspect 17653fe98f52
+[{
+    "Architecture": "amd64",
+    "Author": "",
+    "Comment": "",
+    "Config": {
+        "AttachStderr": false,
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "Cmd": [
+            "/bin/sh",
+            "-c",
+            "node index.js"
+        ],
+        "CpuShares": 0,
+        "Cpuset": "",
+        "Domainname": "",
+        "Entrypoint": null,
+        "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+
+            "NODE_VERSION=0.12.15"
+        ],
+        "ExposedPorts": {
+            "3000/tcp": {}
+        },
+        "Hostname": "2da0903ff372",
+        "Image":
+"cd2d84f556b7179a55502d49d17707bf0f72478ce6bbd9b31d54d57b906332
+09",
+        "Labels": {},
+        "MacAddress": "",
+        "Memory": 0,
+        "MemorySwap": 0,
+        "NetworkDisabled": false,
+        "OnBuild": [],
+        "OpenStdin": false,
+        "PortSpecs": null,
+        "StdinOnce": false,
+        "Tty": false,
+        "User": "",
+        "Volumes": null,
+        "WorkingDir": "/app"
+    },
+    "Container":
+"14a99a0b8d75cc7c43d583f5cd297171699899680eda7c7373545c6c4d2899
+13",
+    "ContainerConfig": {
+        "AttachStderr": false,
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "Cmd": [
+            "/bin/sh",
+            "-c",
+            "#(nop) CMD [\"/bin/sh\" \"-c\" \"node index.js\"]"
+        ],
+        "CpuShares": 0,
+        "Cpuset": "",
+        "Domainname": "",
+        "Entrypoint": null,
+        "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+
+            "NODE_VERSION=0.12.15"
+        ],
+        "ExposedPorts": {
+            "3000/tcp": {}
+        },
+        "Hostname": "2da0903ff372",
+        "Image":
+"cd2d84f556b7179a55502d49d17707bf0f72478ce6bbd9b31d54d57b906332
+09",
+        "Labels": {},
+        "MacAddress": "",
+        "Memory": 0,
+        "MemorySwap": 0,
+        "NetworkDisabled": false,
+        "OnBuild": [],
+        "OpenStdin": false,
+        "PortSpecs": null,
+        "StdinOnce": false,
+        "Tty": false,
+        "User": "",
+        "Volumes": null,
+        "WorkingDir": "/app"
+    },
+    "Created": "2016-08-24T13:39:39.410512783Z",
+    "DockerVersion": "1.6.2",
+    "Id": "17653fe98f52973ef6f2d5be03b42b58b93f75d719bb15898435e9049650d579",
+    "Os": "linux",
+    "Parent":
+"cd2d84f556b7179a55502d49d17707bf0f72478ce6bbd9b31d54d57b90633209"
+,
+    "Size": 0,
+    "VirtualSize": 646538905
+}
+]
+vagrant@docker:~$
+
+
+
+
+	Inspect Docker Container
+
+
+vagrant@docker:~$ sudo docker ps
+CONTAINER ID        IMAGE                 COMMAND                CREATED
+     STATUS              PORTS                    NAMES
+c3ebfb50ccd3        17653fe98f52:latest   "/bin/sh -c 'node in   7 minutes ago
+     Up 7 minutes        0.0.0.0:8080->3000/tcp   focused_jang
+vagrant@docker:~$ sudo docker inspect c3ebfb50ccd3
+[{
+    "AppArmorProfile": "",
+    "Args": [
+        "-c",
+        "node index.js"
+    ],
+    "Config": {
+        "AttachStderr": true,
+        "AttachStdin": false,
+        "AttachStdout": true,
+        "Cmd": [
+            "/bin/sh",
+            "-c",
+            "node index.js"
+        ],
+        "CpuShares": 0,
+        "Cpuset": "",
+        "Domainname": "",
+        "Entrypoint": null,
+        "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+
+            "NODE_VERSION=0.12.15"
+        ],
+        "ExposedPorts": {
+            "3000/tcp": {}
+        },
+        "Hostname": "c3ebfb50ccd3",
+        "Image": "17653fe98f52",
+        "Labels": {},
+        "MacAddress": "",
+        "Memory": 0,
+        "MemorySwap": 0,
+        "NetworkDisabled": false,
+        "OnBuild": null,
+        "OpenStdin": false,
+        "PortSpecs": null,
+        "StdinOnce": false,
+        "Tty": true,
+        "User": "",
+        "Volumes": null,
+        "WorkingDir": "/app"
+    },
+    "Created": "2016-08-29T13:23:40.353069086Z",
+    "Driver": "devicemapper",
+    "ExecDriver": "native-0.2",
+    "ExecIDs": null,
+    "HostConfig": {
+        "Binds": null,
+        "CapAdd": null,
+        "CapDrop": null,
+        "CgroupParent": "",
+        "ContainerIDFile": "",
+        "CpuShares": 0,
+        "CpusetCpus": "",
+        "Devices": [],
+        "Dns": null,
+        "DnsSearch": null,
+        "ExtraHosts": null,
+        "IpcMode": "",
+        "Links": null,
+        "LogConfig": {
+            "Config": null,
+            "Type": "json-file"
+        },
+        "LxcConf": [],
+        "Memory": 0,
+        "MemorySwap": 0,
+        "NetworkMode": "bridge",
+        "PidMode": "",
+        "PortBindings": {
+            "3000/tcp": [
+                {
+                    "HostIp": "",
+                    "HostPort": "8080"
+                }
+            ]
+        },
+        "Privileged": false,
+        "PublishAllPorts": false,
+        "ReadonlyRootfs": false,
+        "RestartPolicy": {
+            "MaximumRetryCount": 0,
+            "Name": "no"
+        },
+        "SecurityOpt": null,
+        "Ulimits": null,
+        "VolumesFrom": null
+    },
+    "HostnamePath":
+"/var/lib/docker/containers/c3ebfb50ccd300ba080b6c65e0012727
+b2e61a734d8b7b35a1189fe9c89d9d79/hostname",
+    "HostsPath":
+"/var/lib/docker/containers/c3ebfb50ccd300ba080b6c65e0012727b2e
+61a734d8b7b35a1189fe9c89d9d79/hosts",
+    "Id": "c3ebfb50ccd300ba080b6c65e0012727b2e61a734d8b7b35a1189fe9c89d9d79",
+    "Image":
+"17653fe98f52973ef6f2d5be03b42b58b93f75d719bb15898435e9049650d579",
+
+    "LogPath":
+"/var/lib/docker/containers/c3ebfb50ccd300ba080b6c65e0012727b2e61
+a734d8b7b35a1189fe9c89d9d79/c3ebfb50ccd300ba080b6c65e0012727b2e61a734d8b7b35a118
+9fe9c89d9d79-json.log",
+    "MountLabel": "",
+    "Name": "/focused_jang",
+    "NetworkSettings": {
+        "Bridge": "docker0",
+        "Gateway": "172.17.42.1",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "IPAddress": "172.17.0.12",
+        "IPPrefixLen": 16,
+        "IPv6Gateway": "",
+        "LinkLocalIPv6Address": "fe80::42:acff:fe11:c",
+        "LinkLocalIPv6PrefixLen": 64,
+        "MacAddress": "02:42:ac:11:00:0c",
+        "PortMapping": null,
+        "Ports": {
+            "3000/tcp": [
+                {
+                    "HostIp": "0.0.0.0",
+                    "HostPort": "8080"
+                }
+            ]
+        }
+    },
+    "Path": "/bin/sh",
+    "ProcessLabel": "",
+    "ResolvConfPath":
+"/var/lib/docker/containers/c3ebfb50ccd300ba080b6c65e00127
+27b2e61a734d8b7b35a1189fe9c89d9d79/resolv.conf",
+    "RestartCount": 0,
+    "State": {
+        "Dead": false,
+        "Error": "",
+        "ExitCode": 0,
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "OOMKilled": false,
+        "Paused": false,
+        "Pid": 15642,
+        "Restarting": false,
+        "Running": true,
+        "StartedAt": "2016-08-29T13:23:40.665899647Z"
+    },
+    "Volumes": {},
+    "VolumesRW": {}
+}
+]
+vagrant@docker:~$
 
 
