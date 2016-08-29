@@ -237,10 +237,46 @@ Additional Notes
 
 
 
+	Dockerfile
+
+	FROM node:0.12
+	WORKDIR /app
+	ADD . /app
+	RUN npm install
+	EXPOSE 3000
+	CMD node index.js
 
 
 
 
+        FROM node:0.12		FROM is always the first Dockerfile cmd. 
+				Retrieve node from dockerhub. This sets the
+				base image for subsequent instructions
+        
+	WORKDIR /app		Set the woring  directory for next cmds
+        
+	ADD . /app		Add files in currecnt dir (ie. Dockerfile
+				index.js, package.json) to WORKDIR		
+        
+	RUN npm install		Run this cmd in the WORKDIR (ie. run npm
+				install. npm is node package manager)
+        
+	EXPOSE 3000		The EXPOSE instruction informs Docker that 
+				the container listens on the specified 
+				network ports at runtime.
+				EXPOSE does not make the ports of the
+				container accessible to the host. To do that, 
+				you must use either the -p flag to publish a 
+				range of ports or the -P flag to publish all 
+				of the exposed ports. You can expose one port 
+				number and publish it externally under another
+				number (See above where we map the port to a 
+				diff prt for each container we fire up 8080 &
+				8081) 
+
+        CMD node index.js	Execute index.js under node (ie. run cmd
+				'node' with parameter 'index.js'
+				note: only 1 cmd per Dockerfile
 
 
 
