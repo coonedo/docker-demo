@@ -23,8 +23,7 @@ docker commands & concepts (Docker swarm & kubernetes covered later / elsewhere)
 3.	Start a container from the image we already have 
 4. 	Copy a file to the running container
 5.	Commit modified container to a new image
-
-
+6.	Docker volumes (Persistent container data)
 
 Instructions:
 -------------
@@ -237,3 +236,90 @@ vagrant@docker:~$
 
 
 
+
+-	DOCKER VOLUMES
+
+	A volume is a persistent data store
+
+	docker run -d -P --name web -v /webapp training/webapp python app.py
+
+	-d	Run container in background and print container ID
+	-P	Publish all exposed ports to random ports
+	--name	Assign a name to the container (in this case 'web')
+	-v	Bind mount a volume (default []) (in this case /webapp)
+	
+vagrant@docker:~/docker-demo$ docker run -d -P --name web -v /webapp
+training/webapp python app.py
+Unable to find image 'training/webapp:latest' locally
+latest: Pulling from training/webapp
+e190868d63f8: Pull complete
+909cd34c6fd7: Pull complete
+0b9bfabab7c1: Pull complete
+a3ed95caeb02: Pull complete
+10bbbc0fc0ff: Pull complete
+fca59b508e9f: Pull complete
+e7ae2541b15b: Pull complete
+9dd97ef58ce9: Pull complete
+a4c1b0cb7af7: Pull complete
+Digest:
+sha256:06e9c1983bd6d5db5fba376ccd63bfa529e8d02f23d5079b8f74a616308fb11d
+Status: Downloaded newer image for training/webapp:latest
+e944e749952f302ea7dffa734a711d06eda68cc661f8a25f31e80f4750bf177f
+vagrant@docker:~/docker-demo$
+
+
+	We now have a python web application running -  with a volume mounted.
+
+
+vagrant@docker:~/docker-demo$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED
+STATUS              PORTS                     NAMES
+e944e749952f        training/webapp     "python app.py"     11 minutes ago
+Up 11 minutes       0.0.0.0:32768->5000/tcp   web
+vagrant@docker:~/docker-demo$
+
+	vagrant@docker:~/docker-demo$ curl localhost:32768
+	Hello world!vagrant@docker:~/docker-demo$
+
+
+	vagrant@docker:~/docker-demo$ docker inspect web
+[
+    {
+        "Id":
+"e944e749952f302ea7dffa734a711d06eda68cc661f8a25f31e80f4750bf177f"
+,
+        "Created": "2016-08-31T17:00:18.37798944Z",
+        "Path": "python",
+        "Args": [
+            "app.py"
+.
+.
+.
+.
+.
+.
+        "Mounts": [
+            {
+                "Name":
+"38b695c1c8bae060ac2a384deccc2f1917961fc312b8137f00839e7
+343ddfc5e",
+                "Source":
+"/var/lib/docker/volumes/38b695c1c8bae060ac2a384deccc2
+f1917961fc312b8137f00839e7343ddfc5e/_data",
+                "Destination": "/webapp",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],	
+
+
+
+	Mounting a host directory (/src/webapp) as a host volume (/opt/webapp)
+
+	docker run -d -P --name web -v /src/webapp:/opt/webapp training/webapp
+python app.py
+
+
+	
