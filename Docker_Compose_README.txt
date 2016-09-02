@@ -22,6 +22,7 @@ launch multiple containers
 1.	Install docker-compose
 2.	docker-compose filr overview (basic)
 3. 	start multiple containers with docker compose
+4. 	stop / remove multiple containers
 
 
 
@@ -128,5 +129,31 @@ dockerdemo_web_1 is up-to-date
 vagrant@docker:~/docker-demo$ curl localhost:3000
 Hello World! You are visitor number 3vagrant@docker:~/docker-demo$
 
+
+
+
+	STOP & REMOVE THE CONTAINERS
+
+vagrant@docker:~/docker-demo$ docker ps
+CONTAINER ID        IMAGE               COMMAND                CREATED
+   STATUS              PORTS                    NAMES
+a56d2122edd2        dockerdemo_web      "node index-db.js"     4 minutes ago
+   Up 4 minutes        0.0.0.0:3000->3000/tcp   dockerdemo_web_1
+506fdf34868c        orchardup/mysql     "/usr/local/bin/run"   10 minutes ago
+   Up 10 minutes       0.0.0.0:3306->3306/tcp   dockerdemo_db_1
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$ docker-compose down
+Stopping dockerdemo_web_1 ... done
+Stopping dockerdemo_db_1 ... done
+Removing dockerdemo_web_1 ... done
+Removing dockerdemo_db_1 ... done
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
+vagrant@docker:~/docker-demo$
 
 
