@@ -48,7 +48,7 @@ OR
 
 -- Clone the following repo from my github
 
-	https://github.com/donaltn3/docker-demo
+	https://github.com/coonedo/docker-demo
 
 
 - 	Windoze: From dir 'docker_project', run the following command: 
