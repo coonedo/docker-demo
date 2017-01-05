@@ -233,6 +233,26 @@ Additional Notes
 	a 'residual container' hanging around that does not show up on docker 
 	ps. *******
 
+i
+
+
+
+
+	STOP / REMOVE multiple containers
+
+	One liner to stop / remove all of Docker containers:
+
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+
+	or
+
+	docker rm -f $(docker ps -a -q)
+
+	Same for images ..
+
+	docker rmi $(docker images -q)
+
 
 
 
@@ -245,6 +265,8 @@ Additional Notes
 	RUN npm install
 	EXPOSE 3000
 	CMD node index.js
+
+
 
 
 
